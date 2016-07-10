@@ -10,35 +10,85 @@ namespace CollectionNTesst
     public class PolinomNTest
     {
         [Test]
-        public void TestMethod1()
+        [TestCase(new double[] { 1, 2 },
+                  new double[] { 1, 2 },
+            Result = new double[] { 1, 4, 4 })]
+        [TestCase(new double[] { 0, 1 },
+                  new double[] { 0, 1 },
+            Result = new double[] { 0,0,1 })]
+        [TestCase(new double[] { 0,0,1},
+                  new double[] { 2 },
+            Result = new double[] { 0,0,2})]
+
+        public double[] Polinom_Mult_P1_P2_Result(double[] d1, double[] d2)
         {
-            var test = new Polinom(new double[3] {0,10,1});
-            Debug.WriteLine($"Elements = {test.Calculate(2)}");
-            var a = new double[2] { 1, 1 };
-            var b = new double[2] { 1, 1 };
-            Assert.AreEqual(Enumerable.SequenceEqual(a, b), true);
+            Polinom p1 = new Polinom(d1);
+            Polinom p2 = new Polinom(d2);
+            Polinom p3 = p1 * p2;
+            return p3.Elements;
+           // Assert.IsTrue(Enumerable.SequenceEqual(p3.elements, result));
         }
 
         [Test]
-        public void TestMethod2()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Polinom_Empty_Mult_Polinom_Exeption()
         {
-            var test = new Polinom(new double[6] { 0, 10, 1,0,-3,-5 });
-            var test2 = new Polinom(new double[6] { 0, -10, -1, 0, 3, 6 });
-            test += test2;
-            Debug.WriteLine($"Elements = {test.ToString()}");
-
-            Assert.AreEqual(1, 1);
+            double[] d1 = null;
+            Polinom p1 = new Polinom(d1);
+            p1.Calculate(10);
         }
 
         [Test]
-        public void TestMethod3()
+        [TestCase(new double[] { 1, 2 },
+                  new double[] { 1, 2 },
+            Result = new double[] { 2,4 })]
+        [TestCase(new double[] { 0, 1 },
+                  new double[] { 0, 1 },
+            Result = new double[] { 0, 2 })]
+        [TestCase(new double[] { 0, 0, 1 },
+                  new double[] { 2 },
+            Result = new double[] { 2,0,1})]
+        public double[] Polinom_Sum_P1_P2_Result(double[] d1, double[] d2)
         {
-            var test = new Polinom(new double[6] { 1, 1, 1, 1, 1, 1 });
-            var test2 = new Polinom(new double[6] { 1, 1, 1, 1, 1, 1 });
-            test *= test2;
-            Debug.WriteLine($"Elements = {test.ToString()}");
+            Polinom p1 = new Polinom(d1);
+            Polinom p2 = new Polinom(d2);
+            Polinom p3 = p1 + p2;
+            return p3.Elements;
+        }
 
-            Assert.AreEqual(1, 1);
+        [Test]
+        [TestCase(new double[] { 1, 2 },
+                  new double[] { 1, 2 },
+            Result = new double[] {0, 0})]
+        [TestCase(new double[] { 0, 1 },
+                  new double[] { 0, 1 },
+            Result = new double[] { 0, 0 })]
+        [TestCase(new double[] { 0, 0, 1 },
+                  new double[] { 2 },
+            Result = new double[] { -2, 0, 1 })]
+        public double[] Polinom_Sub_P1_P2_Result(double[] d1, double[] d2)
+        {
+            Polinom p1 = new Polinom(d1);
+            Polinom p2 = new Polinom(d2);
+            Polinom p3 = p1 - p2;
+            return p3.Elements;
+        }
+
+        [Test]
+        [TestCase(new double[] {},
+                  new double[] { 1, 2 },
+            Result = new double[] {1,2 })]
+        [TestCase(new double[] {},
+                  new double[] { 0, 1 },
+            Result = new double[] { 0,1 })]
+        [TestCase(new double[] {},
+                  new double[] { 2 },
+            Result = new double[] { 2 })]
+        public double[] Polinom_Sum_Empty_P2_Result(double[] d1, double[] d2)
+        {
+            Polinom p2 = new Polinom(d2);
+            Polinom p3 = p2 - d1;
+            return p3.Elements;
         }
     }
 }
