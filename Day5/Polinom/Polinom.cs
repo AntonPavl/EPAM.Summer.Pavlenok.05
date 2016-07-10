@@ -34,7 +34,7 @@ namespace PolinomCollection
 
         public override string ToString()
         {
-            if (elements == null) return "";
+            if (elements == null) return String.Empty;
             string result = String.Empty;
             for (int i = 0; i < elements.Length; i++)
             {
@@ -89,9 +89,6 @@ namespace PolinomCollection
             return new Polinom(Mult(lp.elements, rp));
         }
         #endregion Operator*
-
-
-
 
         private static double[] Sum(double[] p1,double[] p2)
         {
@@ -171,37 +168,13 @@ namespace PolinomCollection
 
         private static double[] Mult(double[] p1, double[] p2)
         {
-            double[] result;
-            if (p1.Length == p2.Length)
+
+            double[] result = new double[p1.Length + p2.Length];
+            for (int i = 0; i < p1.Length; i++)
             {
-                result = new double[p1.Length];
-                for (int i = 0; i < p1.Length; i++)
+                for (int j = 0; j < p2.Length; j++)
                 {
-                    result[i] = p1[i] + p2[i];
-                }
-            }
-            else if (p1.Length > p2.Length)
-            {
-                result = new double[p1.Length];
-                for (int i = 0; i < p2.Length; i++)
-                {
-                    result[i] = p1[i] + p2[i];
-                }
-                for (int i = p2.Length; i < p1.Length; i++)
-                {
-                    result[i] = p1[i];
-                }
-            }
-            else
-            {
-                result = new double[p2.Length];
-                for (int i = 0; i < p1.Length; i++)
-                {
-                    result[i] = p1[i] + p2[i];
-                }
-                for (int i = p1.Length; i < p2.Length; i++)
-                {
-                    result[i] = p2[i];
+                    result[i + j] += p1[i] * p2[j];
                 }
             }
             return result;

@@ -26,6 +26,18 @@ namespace CollectionNTesst
             var test2 = new Polinom(new double[6] { 0, -10, -1, 0, 3, 6 });
             test += test2;
             Debug.WriteLine($"Elements = {test.ToString()}");
+
+            Assert.AreEqual(1, 1);
+        }
+
+        [Test]
+        public void TestMethod3()
+        {
+            var test = new Polinom(new double[6] { 1, 1, 1, 1, 1, 1 });
+            var test2 = new Polinom(new double[6] { 1, 1, 1, 1, 1, 1 });
+            test *= test2;
+            Debug.WriteLine($"Elements = {test.ToString()}");
+
             Assert.AreEqual(1, 1);
         }
     }
