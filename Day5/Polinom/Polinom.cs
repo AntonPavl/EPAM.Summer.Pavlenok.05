@@ -63,15 +63,15 @@ namespace PolinomCollection
         #region Opeartor-
         public static Polinom operator -(Polinom lp, Polinom rp)
         {
-            return new Polinom(Dif(lp.elements, rp.elements));
+            return new Polinom(Sub(lp.elements, rp.elements));
         }
         public static Polinom operator -(double[] lp, Polinom rp)
         {
-            return new Polinom(Dif(lp, rp.elements));
+            return new Polinom(Sub(lp, rp.elements));
         }
         public static Polinom operator -(Polinom lp, double[] rp)
         {
-            return new Polinom(Dif(lp.elements, rp));
+            return new Polinom(Sub(lp.elements, rp));
         }
 
         #endregion Operator-
@@ -128,7 +128,7 @@ namespace PolinomCollection
             return result;
         }
 
-        private static double[] Dif(double[] p1, double[] p2)
+        private static double[] Sub(double[] p1, double[] p2)
         {
             double[] result;
             if (p1.Length == p2.Length)
