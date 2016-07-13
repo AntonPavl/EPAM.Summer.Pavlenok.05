@@ -25,7 +25,10 @@ namespace PolinomCollection
             }
             return result;
         }
-
+        public override int GetHashCode()  //dopisat'
+        {
+            return base.GetHashCode();
+        }
         public override bool Equals(object obj) 
         {
             if (obj == null || !(obj is Polinom))
@@ -94,6 +97,9 @@ namespace PolinomCollection
 
         private static double[] Operate(double[] p1, double[] p2, Func<double, double, double> operation)
         {
+            if (p1 == null || p2 == null || operation == null) throw new ArgumentNullException();
+            if (p1.Length == 0) return p1;
+            if (p2.Length == 0) return p2;
             double[] result;
             if (p1.Length == p2.Length)
             {
@@ -137,6 +143,7 @@ namespace PolinomCollection
         }
         private static double[] Mult(double[] p1, double[] p2)
         {
+            if (p1 == null || p2 == null) throw new ArgumentNullException();
             if (p1.Length == 0) return p1;
             if (p2.Length == 0) return p2;
 

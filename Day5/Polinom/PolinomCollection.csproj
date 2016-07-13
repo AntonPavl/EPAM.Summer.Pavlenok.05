@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Polinom.cs" />
+    <Compile Include="PolinomElement.cs" />
+    <Compile Include="PolinomWithStruct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

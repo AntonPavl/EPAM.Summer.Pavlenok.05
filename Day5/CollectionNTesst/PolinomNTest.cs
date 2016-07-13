@@ -87,6 +87,7 @@ namespace CollectionNTesst
         public double[] Polinom_Sum_Empty_P2_Result(double[] d1, double[] d2)
         {
             Polinom p2 = new Polinom(d2);
+            d1 = null;
             Polinom p3 = p2 - d1;
             return p3.Elements;
         }
