@@ -163,8 +163,8 @@ namespace PolinomCollection
         private static PolinomElement[] Operate(PolinomElement[] p1, PolinomElement[] p2, Func<double, double, double> operation)
         {
             if (p1 == null || p2 == null || operation == null) throw new ArgumentNullException();
-            if (p1.Length == 0) return p1;
-            if (p2.Length == 0) return p2;
+            if (p1.Length == 0) return p2;
+            if (p2.Length == 0) return p1;
             int[] allPowers = GetPowers(p1).Union(GetPowers(p2)).ToArray();
             PolinomElement[] result = new PolinomElement[allPowers.Length];
             for (int i = 0; i < result.Length; i++)
@@ -194,8 +194,8 @@ namespace PolinomCollection
         private static PolinomElement[] Mult(PolinomElement[] p1, PolinomElement[] p2)
         {
             if (p1 == null || p2 == null) throw new ArgumentNullException();
-            if (p1.Length == 0) return p1;
-            if (p2.Length == 0) return p2;
+            if (p1.Length == 0) return p2;
+            if (p2.Length == 0) return p1;
             PolinomElement[] result = new PolinomElement[p1.Length*p2.Length];
             int index = 0;
             for (int i = 0; i < p1.Length; i++)

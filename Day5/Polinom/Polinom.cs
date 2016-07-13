@@ -98,8 +98,8 @@ namespace PolinomCollection
         private static double[] Operate(double[] p1, double[] p2, Func<double, double, double> operation)
         {
             if (p1 == null || p2 == null || operation == null) throw new ArgumentNullException();
-            if (p1.Length == 0) return p1;
-            if (p2.Length == 0) return p2;
+            if (p1.Length == 0) return p2;
+            if (p2.Length == 0) return p1;
             double[] result;
             if (p1.Length == p2.Length)
             {
@@ -144,8 +144,8 @@ namespace PolinomCollection
         private static double[] Mult(double[] p1, double[] p2)
         {
             if (p1 == null || p2 == null) throw new ArgumentNullException();
-            if (p1.Length == 0) return p1;
-            if (p2.Length == 0) return p2;
+            if (p1.Length == 0) return p2;
+            if (p2.Length == 0) return p1;
 
             double[] result;
             if (p1.Length == 1 || p2.Length == 1) result = new double[Math.Max(p1.Length, p2.Length)];
