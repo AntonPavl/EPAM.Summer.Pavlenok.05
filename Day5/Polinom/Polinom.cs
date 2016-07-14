@@ -9,14 +9,26 @@ namespace PolinomCollection
     public class Polinom
     {
         private readonly double[] elements;
+        /// <summary>
+        /// Get an array of  PolinomElement structs
+        /// </summary>
         public double[] Elements { get { return elements; } }
+        /// <summary>
+        /// Create a class from an array of doubles
+        /// </summary>
+        /// <param name="polinom">Array of doubles</param>
         public Polinom(double[] polinom)
         {
             elements = polinom;
         }
+        /// <summary>
+        /// Evaluate polinom
+        /// </summary>
+        /// <param name="num">Polinom's number</param>
+        /// <returns></returns>
         public double Calculate(double num)
         {
-            if (elements == null) throw new ArgumentNullException();
+            if (ReferenceEquals(elements, null)) throw new ArgumentNullException();
             if (elements.Length == 0) return 0;
             double result = 0;
             for (int i = 0; i < elements.Length; i++)
@@ -25,21 +37,33 @@ namespace PolinomCollection
             }
             return result;
         }
-        public override int GetHashCode()  //dopisat'
+        /// <summary>
+        /// Serves as the default hash function.
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode() 
         {
-            return base.GetHashCode();
+            return elements.GetHashCode();
         }
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns></returns>
         public override bool Equals(object obj) 
         {
-            if (obj == null || !(obj is Polinom))
+            if (ReferenceEquals(obj, null)|| !(obj is Polinom))
                 return false;
             else
                 return Enumerable.SequenceEqual(elements,((Polinom)obj).elements);
         }
-
+        /// <summary>
+        /// Get Polinom in string's format
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
-            if (elements == null) return "";
+            if (ReferenceEquals(elements,null)) return "";
             var result = new StringBuilder();
             for (int i = 0; i < elements.Length; i++)
             {

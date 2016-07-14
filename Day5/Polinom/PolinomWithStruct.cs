@@ -11,14 +11,24 @@ namespace PolinomCollection
     public class PolinomWithStruct
     {
         private readonly PolinomElement[] elements;
-
+        /// <summary>
+        /// Get an array of  PolinomElement structs
+        /// </summary>
         public PolinomElement[] Elements { get { return elements; } }
 
+        /// <summary>
+        /// Create a class from  an array of PolinomElement structs
+        /// </summary>
+        /// <param name="polinom">Array of PolinomElements</param>
         public PolinomWithStruct(PolinomElement[] polinom)
         {
             elements = polinom;
         }
 
+        /// <summary>
+        /// Create a class from an array of doubles
+        /// </summary>
+        /// <param name="polinom">Array of doubles</param>
         public PolinomWithStruct(double[] polinom)
         {
             elements = ToPolinomElement(polinom);
@@ -26,7 +36,7 @@ namespace PolinomCollection
 
         private static PolinomElement[] ToPolinomElement(double[] num)
         {
-            if (num == null) throw new ArgumentNullException();
+            if (ReferenceEquals(num, null)) throw new ArgumentNullException();
             if (num.Length == 0) return new PolinomElement[0];
 
             int buffer = 0;
@@ -56,7 +66,7 @@ namespace PolinomCollection
         /// <returns></returns>
         public double        Calculate(double num)
         {
-            if (elements == null) throw new ArgumentNullException();
+            if (ReferenceEquals(elements, null)) throw new ArgumentNullException();
             if (elements.Length == 0) return 0;
             double result = 0;
             for (int i = 0; i < elements.Length; i++)
@@ -72,8 +82,8 @@ namespace PolinomCollection
         /// <returns></returns>
         public override int  GetHashCode()
         {
-            return base.GetHashCode();
-        } //dopisat'
+            return elements.GetHashCode();
+        } 
 
         /// <summary>
         /// Determines whether the specified object is equal to the current object.
@@ -82,7 +92,7 @@ namespace PolinomCollection
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            if (obj == null || !(obj is PolinomWithStruct))
+            if (ReferenceEquals(obj, null) || !(obj is PolinomWithStruct))
                 return false;
             else
                 return Enumerable.SequenceEqual(elements, ((PolinomWithStruct)obj).elements);
@@ -94,7 +104,7 @@ namespace PolinomCollection
         /// <returns></returns>
         public override string ToString()
         {
-            if (elements == null) return "";
+            if (ReferenceEquals(elements, null)) return "";
             var result = new StringBuilder();
             for (int i = 0; i < elements.Length; i++)
             {
@@ -162,7 +172,8 @@ namespace PolinomCollection
 
         private static PolinomElement[] Operate(PolinomElement[] p1, PolinomElement[] p2, Func<double, double, double> operation)
         {
-            if (p1 == null || p2 == null || operation == null) throw new ArgumentNullException();
+            if (ReferenceEquals(p1, null) || ReferenceEquals(p2, null) ||
+                ReferenceEquals(operation, null)) throw new ArgumentNullException();
             if (p1.Length == 0) return p2;
             if (p2.Length == 0) return p1;
             int[] allPowers = GetPowers(p1).Union(GetPowers(p2)).ToArray();
@@ -193,7 +204,7 @@ namespace PolinomCollection
 
         private static PolinomElement[] Mult(PolinomElement[] p1, PolinomElement[] p2)
         {
-            if (p1 == null || p2 == null) throw new ArgumentNullException();
+            if (ReferenceEquals(p1, null) || ReferenceEquals(p2, null)) throw new ArgumentNullException();
             if (p1.Length == 0) return p2;
             if (p2.Length == 0) return p1;
             PolinomElement[] result = new PolinomElement[p1.Length*p2.Length];
